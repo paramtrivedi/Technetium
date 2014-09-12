@@ -1,0 +1,392 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Admin.master.cs" Inherits="Admin" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>:: Welcome To Technetium Administator Panel ::</title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+<link media="screen" rel="stylesheet" type="text/css" href="css/admin.css"  />
+<!--[if lte IE 6]><link media="screen" rel="stylesheet" type="text/css" href="css/admin-ie.css" /><![endif]-->
+    <script type="text/javascript" language="javascript">
+            function updateTime()
+            {
+                var label = document.getElementById('ctl00_lblCurrentTime');
+                if (label) {
+                    var time = (new Date()).toLocaleTimeString();
+                    label.innerHTML = time;
+                }
+            }
+            updateTime();
+            window.setInterval(updateTime, 1000);
+        </script>
+</head>
+<body>
+    <form id="form1" runat="server">
+  	<!--[if !IE]>start wrapper<![endif]-->
+	<div id="wrapper">
+		<!--[if !IE]>start head<![endif]-->
+		<div id="Div1">
+
+<div id="logo_user_details">
+				<h1 id="logo"><a href="#">websitename Administration Panel</a></h1>
+				<!--[if !IE]>start user details<![endif]-->
+				<div id="user_details">
+					<ul id="user_details_menu">
+						<li>Welcome <strong>
+                            <asp:Label ID="lblUName" runat="server" Text=""></asp:Label></strong></li>
+						
+								<li class="last">
+                                    <asp:LinkButton ID="lnkLogout" runat="server" onclick="lnkLogout_Click" 
+                                        CausesValidation="False">Logout</asp:LinkButton></li>
+							</ul>
+                    <div id="server_details">
+						<dl>
+							<dt style="color: #FFFFFF">Server time :</dt>
+							<dd style="color: #FFFFFF"><%=DateTime.Now.ToShortTimeString()  %></dd>
+						</dl>
+						<dl>
+							<dt style="color: #FFFFFF">Current Login ip :</dt>
+							<dd style="color: #FFFFFF"><%=System.Net.Dns.GetHostEntry(Request.UserHostAddress).HostName%></dd>
+						</dl>
+					</div>
+					
+					<!--[if !IE]>start search<![endif]-->
+					<!--
+					<div id="search_wrapper">
+						<form action="#">
+							<fieldset>
+								<label>
+									<input class="text" name="" type="text" />
+								</label>
+								<span class="go"><input name="" type="submit" /></span>
+							</fieldset>
+						</form>
+						<ul id="search_wrapper_menu">
+							<li class="first"><a href="#">Advanced Search</a></li>
+							<li class="last"><a href="#">Admin Map</a></li>
+						</ul>
+					</div>
+					-->
+				<!--[if !IE]>end search<![endif]-->
+				
+				</div>
+				
+				<!--[if !IE]>end user details<![endif]-->
+				
+			</div>
+			
+	<!--[if !IE]>start menus_wrapper<![endif]-->
+			<div id="menus_wrapper">
+				
+				
+				
+				
+				
+				<div id="main_menu">
+					<ul>
+						<li><a href="AdminHome.aspx"><span><span>Dashboard</span></span></a></li>
+						<li><a href="GroupView.aspx"><span><span>Group View</span></span></a></li>
+						<li><a href="NewGroup.aspx"><span><span>New Group</span></span></a></li>
+						<li><a href="UserView.aspx"><span><span>User Accounts</span></span></a></li>
+						<li><a href="#"><span><span>Group Map</span></span></a></li>
+						<li><a href="#"><span><span>News</span></span></a></li>
+						<!--<li class="last"><a href="#"><span><span>Static Pages</span></span></a></li>-->
+					</ul>
+				</div>
+				
+				<div id="sec_menu">
+					<ul>
+						<li><a href="#" class="sm11">&nbsp;</a></li>
+						<!--
+						<li><a href="#" class="sm2">Chat and PMs</a></li>
+						<li><a href="#" class="sm3">Search Options</a></li>
+						<li><a href="#" class="sm4">Moderators</a></li>
+						<li><a href="#" class="sm5">Upload Options</a></li>
+						<li><a href="#" class="sm6">Download Options</a></li>
+						<li><a href="#" class="sm7">Emails</a></li>
+						<li>
+							<span class="drop"><span><span><a href="#" class="sm8">More</a></span></span></span>
+							<ul>
+								<li><a class="sm6" href="#">Download options</a></li>
+								<li><a class="sm4" href="#">Menu item</a></li>
+								<li><a class="sm6" href="#">Download options</a></li>
+								<li><a class="sm6" href="#">Download options</a></li>
+								<li><a class="sm6" href="#">Download options</a></li>
+							</ul>
+						</li>-->
+					</ul>
+				</div>
+			</div>
+			<!--[if !IE]>end menus_wrapper<![endif]-->
+			
+			
+			
+		</div>
+		<!--[if !IE]>end head<![endif]-->
+
+<div id="content">
+			
+			
+			
+			
+			
+			<!--[if !IE]>start page<![endif]-->
+			<div id="page">
+				<div class="inner">
+					
+					
+					
+					<!--[if !IE]>start section<![endif]-->	
+					<div class="section">
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+
+					</div>
+					<!--[if !IE]>end section<![endif]-->
+				</div>
+			</div>
+			<!--[if !IE]>end page<![endif]-->
+			<!--[if !IE]>start sidebar<![endif]-->
+			<div id="sidebar">
+				<div class="inner">
+					<!--[if !IE]>start calendar<![endif]-->
+					<div class="calendar">
+						<div class="calendar_top">
+							<strong><asp:Label ID="lblCurrentTime" runat="server" Text=""></asp:Label></strong>
+						</div>
+						<div class="calendar_middle">
+                            <asp:Calendar ID="Calendar1" runat="server" BackColor="White" 
+                                BorderColor="Black" BorderStyle="Solid" CellSpacing="1" Font-Names="Verdana" 
+                                Font-Size="9pt" ForeColor="Black" Height="167px" NextPrevFormat="ShortMonth" 
+                                Width="222px">
+                                <SelectedDayStyle BackColor="#333399" ForeColor="White" />
+                                <TodayDayStyle BackColor="#999999" ForeColor="White" />
+                                <OtherMonthDayStyle ForeColor="#999999" />
+                                <DayStyle BackColor="#CCCCCC" />
+                                <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="White" />
+                                <DayHeaderStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" 
+                                    Height="8pt" />
+                                <TitleStyle BackColor="#333399" BorderStyle="Solid" Font-Bold="True" 
+                                    Font-Size="12pt" ForeColor="White" Height="12pt" />
+                            </asp:Calendar>
+                            <br />
+						</div>
+						<!--[if !IE]>start section content footer<![endif]-->
+						<div class="section_content_footer">
+							<ul>
+								<li><a href="#" class="plus">Add new event</a></li>
+								<li><a href="#" class="next">Next Event</a></li>
+							</ul>
+							<span class="scf"></span>
+						</div>
+						<!--[if !IE]>end section content footer<![endif]-->
+					</div>
+					<!--[if !IE]>end calendar<![endif]-->
+					
+					
+					
+					
+					
+					
+					
+					<!--[if !IE]>start section<![endif]-->	
+					<div class="section">
+						<!--[if !IE]>start title wrapper<![endif]-->
+						<div class="title_wrapper">
+							<h2>Group List</h2>
+							<span class="title_wrapper_left"></span>
+							<span class="title_wrapper_right"></span>
+						</div>
+						<!--[if !IE]>end title wrapper<![endif]-->
+						<!--[if !IE]>start section content<![endif]-->
+						<div class="section_content">
+							<!--[if !IE]>start section content top<![endif]-->
+							<div class="sct">
+								<div class="sct_left">
+									<div class="sct_right">
+										<div class="sct_left">
+											<div class="sct_right">
+													
+													<div class="todo_list">
+                                                    						    <asp:DataList ID="DataList1" runat="server" BackColor="White" 
+                                BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" 
+                                DataKeyField="group_id" DataSourceID="SqlDataSource1" ForeColor="Black" 
+                                GridLines="Vertical" onitemcommand="DataList1_ItemCommand" Width="100%">
+                                <FooterStyle BackColor="#CCCC99" />
+                                <AlternatingItemStyle BackColor="White" />
+                                <ItemStyle BackColor="#F7F7DE" />
+                                <SelectedItemStyle BackColor="#CE5D5A" Font-Bold="True" ForeColor="White" />
+                                <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
+                                <ItemTemplate>
+                                    <br />
+                                    <asp:Image ID="Image1" runat="server" Height="30px" 
+                                        ImageUrl='<%# Eval("group_image") %>' Width="30px" />
+                                    <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" 
+                                        CommandArgument='<%# Eval("group_id")+"-"+Eval("sub_group_id") %>' CommandName="group" 
+                                        Text='<%# Eval("group_name") %>'></asp:LinkButton>&nbsp;
+                                        (<asp:Label ID="Label1" Runat="server" Text='<%# Eval("GrpCnt") %>'></asp:Label>)
+                                </ItemTemplate>
+                            </asp:DataList>
+                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+                                ConnectionString="<%$ ConnectionStrings:TechnetiumConnectionString1 %>" 
+                                SelectCommand="SELECT group_name, group_id, 0 AS sub_group_id, group_image, (SELECT  COUNT(*) AS xcnt FROM Post_Master WHERE (Post_Status='Y' And Group_Id = G.group_id And Sub_Group_Id=0)) AS GrpCnt FROM Group_Master g WHERE (group_status = @group_status) ORDER BY group_id, sub_group_id, group_name">
+                                <SelectParameters>
+                                    <asp:Parameter DefaultValue="Y" Name="group_status" Type="String" />
+                                </SelectParameters>
+                            </asp:SqlDataSource>
+
+                                                    
+                                                    </div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--[if !IE]>end section content top<![endif]-->
+							<!--[if !IE]>start section content bottom<![endif]-->
+							<span class="scb"><span class="scb_left"></span><span class="scb_right"></span></span>
+							<!--[if !IE]>end section content bottom<![endif]-->
+							
+						</div>
+						<!--[if !IE]>end section content<![endif]-->
+					</div>
+					<!--[if !IE]>end section<![endif]-->
+					
+					
+					<!--[if !IE]>start section<![endif]-->	
+					<div class="section">
+						<!--[if !IE]>start title wrapper<![endif]-->
+						<div class="title_wrapper">
+							<h2>Photo Gallery</h2>
+							<span class="title_wrapper_left"></span>
+							<span class="title_wrapper_right"></span>
+						</div>
+						<!--[if !IE]>end title wrapper<![endif]-->
+						<!--[if !IE]>start section content<![endif]-->
+						<div class="section_content">
+							<!--[if !IE]>start section content top<![endif]-->
+							<div class="sct">
+								<div class="sct_left">
+									<div class="sct_right">
+										<div class="sct_left">
+											<div class="sct_right">
+												<div class="photo_gallery">
+													
+													
+														<div class="gal_top">
+															<div class="gal_bottom">
+																<div class="gal_left">
+																	<div class="gal_right">
+																		<ul>
+																			<li><a href="#"><img width="96" height="71" src="images/gallery_thumb.jpg" alt="" /></a></li>
+																			<li><a href="#"><img width="96" height="71" src="images/gallery_thumb1.jpg" alt="" /></a></li>
+																			<li><a href="#"><img width="96" height="71" src="images/gallery_thumb2.jpg" alt="" /></a></li>
+																			<li><a href="#"><img width="96" height="71" src="images/gallery_thumb3.jpg" alt="" /></a></li>
+																			<li><a href="#"><img width="96" height="71" src="images/gallery_thumb4.jpg" alt="" /></a></li>
+																			<li><a href="#"><img width="96" height="71" src="images/gallery_thumb5.jpg" alt="" /></a></li>
+																		</ul>
+																	</div>
+																</div>
+															</div>
+														</div>
+													
+													
+													
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--[if !IE]>end section content top<![endif]-->
+							
+							<!--[if !IE]>start section content bottom<![endif]-->
+							<span class="scb"><span class="scb_left"></span><span class="scb_right"></span></span>
+							<!--[if !IE]>end section content bottom<![endif]-->
+							
+							<!--[if !IE]>start section content footer<![endif]-->
+							<div class="section_content_footer">
+								<ul>
+									<li><a href="#" class="plus">Add new photo</a></li>
+									<li><a href="#" class="list">View all photos</a></li>
+								</ul>
+								<span class="scf"></span>
+							</div>
+							<!--[if !IE]>end section content footer<![endif]-->
+							
+							
+						</div>
+						<!--[if !IE]>end section content<![endif]-->
+					</div>
+					<!--[if !IE]>end section<![endif]-->
+					
+					
+					<!--[if !IE]>start quick info<![endif]-->
+					<div class="quick_info">
+						<div class="quick_info_top">
+							<h2>Quick info</h2>
+						</div>
+						<div class="quick_info_content">
+							<dl>
+								<dt>12 products</dt>
+								<dd>avaiting approval</dd>
+							</dl>
+							<dl>
+								<dt>228 sales</dt>
+								<dd>in the last 24 hours</dd>
+							</dl>
+							<dl>
+								<dt>18 users</dt>
+								<dd>currently online</dd>
+							</dl>
+							<dl>
+								<dt>15.2%</dt>
+								<dd>increase in traffic this month</dd>
+							</dl>
+						</div>
+						<span class="quick_info_bottom"></span>
+					</div>
+					<!--[if !IE]>end quick info<![endif]-->
+					
+					
+				
+				
+				</div>
+			</div>
+			<!--[if !IE]>end sidebar<![endif]-->
+			
+		</div>        
+    </div>
+    	
+	<!--[if !IE]>start footer<![endif]-->
+	<div id="footer">
+		<div id="footer_inner">
+		
+		<dl class="copy">
+			<dt><strong>HyperAdmin</strong> <em>build 26122008</em></dt>
+			<dd>&copy; 2012-13 Technetium.com  All rights reserved.</dd>
+		</dl>
+		
+		<dl class="quick_links">
+			<dt><strong>Quick Links :</strong></dt>
+			<dd>
+				<ul>
+					<li><a href="#">Dashboard </a></li>
+					<li><a href="#">Profile</a></li>
+					<li><a href="#">View Group</a></li>
+					<li><a href="#">New Group</a></li>
+					<li><a href="#">Users</a></li>
+					<li class="last"><a href="#">Log out</a></li>
+				</ul>
+			</dd>
+		</dl>
+		
+		</div>
+	</div>
+	<!--[if !IE]>end footer<![endif]-->
+
+    </form>
+</body>
+</html>

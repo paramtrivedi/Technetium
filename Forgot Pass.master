@@ -1,0 +1,58 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Forgot Pass.master.cs" Inherits="Forgot_Pass" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+ <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link rel=stylesheet type=text/css href="Tcss/oldal-elrendezes.css"/>
+    <link rel=stylesheet type=text/css href="Tcss/oldal-kinezet.css"/>
+    <style type="text/css">
+        .hide {display:none}
+        .disp {display:block}
+        INPUT { font-size:10pt}
+        .bg 
+        { background-color:#C0C0C0;}
+        .bg1 
+        { background-color:#F0F0F0;}
+        .tright
+        { text-align:right;}
+        .highlight {background-color: yellow;}
+        .bg2 {color:#C0C0C0}
+        .style1
+        {
+            width: 239px;
+        }
+        </style>
+</head>
+<body>
+     <form id="form1" runat="server">
+    <div id=tarolo>
+<div id=fejlec>
+<div id=fejlec-felso></div>
+<div id=fejlec-kozepso>
+<table width=95% cellpadding=0 cellspacing=0>
+<tr>
+<td rowspan=2><IMG alt="Technetium" src="images/Symbol.gif"></td>
+<td valign=top><h1><A id=oldal-nev title="Technetium" href="#">Technetium.com</A></h1>
+<div align=center>The Element Which Force You To Learn Latest Technology</div>
+</td>
+</tr>
+<tr>
+<td colspan=2><marquee scrollamount=3>Welcome To Technetium  </marquee></td>
+</tr>
+</table>
+</div>
+<div id=fejlec-also><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="lnk1">&nbsp;</span></div></div>
+<div id=tartalmi-resz>
+<div id=tartalom>
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+        <div class=clear>
+<div class=egyebek></div></div></div></div></div>
+
+    </form>
+</body>
+</html>

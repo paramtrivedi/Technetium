@@ -1,0 +1,545 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="User.master.cs" Inherits="User" %>
+
+<%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="asp" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+        <title>:: Welcome To Technetium User Panel ::</title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+<link media="screen" rel="stylesheet" type="text/css" href="css/admin.css"  />
+<!--[if lte IE 6]><link media="screen" rel="stylesheet" type="text/css" href="css/admin-ie.css" /><![endif]-->
+    <script type="text/javascript" language="javascript">
+        function updateTime() {
+            var label = document.getElementById('ctl00_lblCurrentTime');
+            if (label) {
+                var time = (new Date()).toLocaleTimeString();
+                label.innerHTML = time;
+            }
+            //__doPostBack('<%= btnRefresh.ClientID %>', '');
+        }
+        window.setInterval(updateTime, 1000);
+        </script>
+    <script type="text/javascript" src="Script/jquery.js"></script>
+	<script type="text/javascript" src="Script/thickbox.js"></script>
+	<link rel="stylesheet" href="Script/thickbox.css" type="text/css" media="screen"/>
+
+    <script type="text/javascript" src="Script/jquery.min.js"></script>
+    <script type="text/javascript" src="Script/jquery-ui.min.js"></script>
+    <link type="text/css" rel="Stylesheet" href="css/jquery-ui.css">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('a#popup').live('click', function (e) {
+
+                var page = $(this).attr("href")
+
+                var $dialog = $('<div></div>')
+                .html('<iframe frameborder=no scrolling=no style="border: 0px; " src="' + page + '" height=350px width=220px></iframe>')
+                .dialog({
+                    autoOpen: false,
+                    modal: false,
+                    height: 450,
+                    width: 'auto',
+                    title: "Chat",
+                    buttons: {
+                        "Close": function () { $dialog.dialog('close'); }
+                    },
+                    close: function (event, ui) {
+                        //__doPostBack('<%= btnRefresh.ClientID %>', '');
+                    }
+                });
+                $dialog.dialog('open');
+                e.preventDefault();
+            });
+        });
+    </script>       
+        <style type="text/css">
+            .style1
+            {
+                width: 100%;
+            }
+            </style>
+        
+</head>
+<body>
+    
+    <form id="form1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
+    </asp:ScriptManager>
+  	<!--[if !IE]>start wrapper<![endif]-->
+	<div id="wrapper">
+		<!--[if !IE]>start head<![endif]-->
+		<div id="Div1">
+
+<div id="logo_user_details">
+				<h1 id="logo"><a href="#">websitename Administration Panel</a></h1>
+				<!--[if !IE]>start user details<![endif]-->
+				<div id="user_details">
+					<ul id="user_details_menu">
+						<li>Welcome <strong>
+                            <asp:Label ID="lblUName" runat="server" Text=""></asp:Label></strong></li>
+						<li>
+                                <asp:Image ID="ImgProfil" runat="server" Height="45px" Width="45px" ImageAlign=Left />
+							    <asp:HyperLink ID="HyperLink1" NavigateUrl="~/ChangePass.aspx" runat="server">ChangePassword</asp:HyperLink>
+                                <br />
+								<asp:LinkButton ID="lnkLogout" runat="server" onclick="lnkLogout_Click" 
+                                        CausesValidation="False">Logout</asp:LinkButton>
+						</li>
+					</ul>
+                    <div id="server_details">
+                        <dl>
+                        <dt>&nbsp;</dt>
+                        </dl>
+						<dl>
+							<dt style="color: #FFFFFF">Server time :
+							<%=DateTime.Now.ToShortTimeString()  %></dt>
+						</dl>
+						<dl>
+							<dt style="color: #FFFFFF">Current Login ip :
+							<%=System.Net.Dns.GetHostEntry(Request.UserHostAddress).HostName%><//dt>
+						</dl>
+					</div>
+					
+					<!--[if !IE]>start search<![endif]-->
+					
+					<div id="search_wrapper">
+                    <table>
+                    <tr>
+                    <td>
+                        <asp:Label ID="Label3" runat="server" Text="Search"></asp:Label></td>
+                        <td>
+                        <asp:TextBox ID="Txtserch" runat="server" Height="17px" Width="94px"></asp:TextBox>
+												<asp:AutoCompleteExtender ID="Txtserch_AutoCompleteExtender" runat="server" 
+                            DelimiterCharacters="" Enabled="True" MinimumPrefixLength="1" 
+                            ServiceMethod="GetUserlist" ServicePath="AutoComplete.asmx" 
+                            TargetControlID="Txtserch">
+                        </asp:AutoCompleteExtender>
+                        </td></tr>
+                        <tr>
+                        <td colspan="2">
+												<ul id="search_wrapper_menu">
+							<li class="first"><a href="http://www.google.com">Advanced Search</a></li>
+							
+						</ul>
+                        </td>
+                        </tr>
+
+                        </table>
+					</div>
+                    
+					
+				<!--[if !IE]>end search<![endif]-->
+				
+				</div>
+				
+				<!--[if !IE]>end user details<![endif]-->
+				
+			</div>
+			
+	<!--[if !IE]>start menus_wrapper<![endif]-->
+			<div id="menus_wrapper">
+				
+				
+				
+				
+				
+				<div id="main_menu">
+					<ul>
+						<li><a href="TechHub.aspx"><span><span>Tech Hub</span></span></a></li>
+						<li><a href="MyGroups.aspx"><span><span>My Groups</span></span></a></li>
+						<li><a href="#"><span><span>Freinds</span></span></a></li>
+						<li><a href="#"><span><span>Messages</span></span></a></li>
+						<li><a href="#"><span><span>Group Map</span></span></a></li>
+						<li><a href="UserProfile.aspx"><span><span>Settings</span></span></a></li>
+						<!--<li class="last"><a href="#"><span><span>Static Pages</span></span></a></li>-->
+					</ul>
+				</div>
+				
+				<div id="sec_menu">
+					<ul>
+						<li><a href="#" class="sm11">&nbsp;</a></li>
+						<!--
+						<li><a href="#" class="sm2">Chat and PMs</a></li>
+						<li><a href="#" class="sm3">Search Options</a></li>
+						<li><a href="#" class="sm4">Moderators</a></li>
+						<li><a href="#" class="sm5">Upload Options</a></li>
+						<li><a href="#" class="sm6">Download Options</a></li>
+						<li><a href="#" class="sm7">Emails</a></li>
+						<li>
+							<span class="drop"><span><span><a href="#" class="sm8">More</a></span></span></span>
+							<ul>
+								<li><a class="sm6" href="#">Download options</a></li>
+								<li><a class="sm4" href="#">Menu item</a></li>
+								<li><a class="sm6" href="#">Download options</a></li>
+								<li><a class="sm6" href="#">Download options</a></li>
+								<li><a class="sm6" href="#">Download options</a></li>
+							</ul>
+						</li>-->
+					</ul>
+				</div>
+			</div>
+			<!--[if !IE]>end menus_wrapper<![endif]-->
+			
+			
+			
+		</div>
+		<!--[if !IE]>end head<![endif]-->
+
+<div id="content">
+			
+			
+			
+			
+			
+			<!--[if !IE]>start page<![endif]-->
+			<div id="page">
+				<div class="inner">
+					<!--[if !IE]>start section<![endif]-->	
+					<div class="section">
+                        <table style="width:100%">
+                        <tr>
+                        <td>
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+                        </td>
+                        <td width=150px valign=top style="border-left:1px solid gray">
+                            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                            <ContentTemplate>
+                            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" 
+                                BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" 
+                                CellPadding="4" DataSourceID="SqlDataSource3" ForeColor="Black" 
+                                GridLines="Vertical" Width="100%">
+                                <AlternatingRowStyle BackColor="White" />
+                                <Columns>
+                                    <asp:TemplateField HeaderText="Online User" SortExpression="User_Name">
+                                        <EditItemTemplate>
+                                            <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("User_Name") %>'></asp:TextBox>
+                                        </EditItemTemplate>
+                                        <ItemTemplate>
+                                            <asp:Image ID="Image4" runat="server" Height="30px" 
+                                                ImageUrl='<%# Eval("User_Img") %>' Width="30px" />
+                                                <a id="popup" href='Chat.aspx?uid=<%# Eval("User_ID") %>&unm=<%# Eval("User_Name") %>' ><%# Eval("User_Name") %></a>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                </Columns>
+                                <FooterStyle BackColor="#CCCC99" />
+                                <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
+                                <PagerStyle BackColor="#F7F7DE" ForeColor="Black" HorizontalAlign="Right" />
+                                <RowStyle BackColor="#F7F7DE" />
+                                <SelectedRowStyle BackColor="#CE5D5A" Font-Bold="True" ForeColor="White" />
+                                <SortedAscendingCellStyle BackColor="#FBFBF2" />
+                                <SortedAscendingHeaderStyle BackColor="#848384" />
+                                <SortedDescendingCellStyle BackColor="#EAEAD3" />
+                                <SortedDescendingHeaderStyle BackColor="#575357" />
+                            </asp:GridView>
+                            <asp:SqlDataSource ID="SqlDataSource3" runat="server" 
+                                ConnectionString="<%$ ConnectionStrings:TechnetiumConnectionString1 %>" 
+                                SelectCommand="SELECT User_Name, User_Img, User_Id FROM Chat WHERE (group_id = @group_id) AND (User_Id &lt;&gt; @User_Id) AND (Active_Session = @Active_Session) ORDER BY User_Name">
+                                <SelectParameters>
+                                    <asp:SessionParameter Name="group_id" SessionField="gid" Type="String" />
+                                    <asp:SessionParameter Name="User_Id" SessionField="uid" Type="String" />
+                                    <asp:Parameter DefaultValue="Y" Name="Active_Session" Type="String" />
+                                </SelectParameters>
+                            </asp:SqlDataSource>
+                            <asp:Button ID="btnRefresh" Text="refresh" runat="server" style="display:none"
+            onclick="btnRefresh_Click" />
+                            </ContentTemplate>
+                            </asp:UpdatePanel>
+
+                        </td>
+                        </tr>
+                        </table>
+					</div>
+					<!--[if !IE]>end section<![endif]-->
+				</div>
+			</div>
+			<!--[if !IE]>end page<![endif]-->
+			<!--[if !IE]>start sidebar<![endif]-->
+			<div id="sidebar">
+				<div class="inner">
+				
+				
+					<!--[if !IE]>start calendar<![endif]-->
+					<div class="calendar">
+						<div class="calendar_top">
+							<strong><asp:Label ID="lblCurrentTime" runat="server" Text=""></asp:Label></strong>
+							</div>
+						<div class="calendar_middle">
+						    <asp:DataList ID="DataList1" runat="server" BackColor="White" 
+                                BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" 
+                                DataKeyField="group_id" DataSourceID="SqlDataSource1" ForeColor="Black" 
+                                GridLines="Vertical" onitemcommand="DataList1_ItemCommand" Width="100%">
+                                <FooterStyle BackColor="#CCCC99" />
+                                <AlternatingItemStyle BackColor="White" />
+                                <ItemStyle BackColor="#F7F7DE" />
+                                <SelectedItemStyle BackColor="#CE5D5A" Font-Bold="True" ForeColor="White" />
+                                <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
+                                <ItemTemplate>
+                                    <br />
+                                    <asp:Image ID="Image1" runat="server" Height="30px" 
+                                        ImageUrl='<%# Eval("group_image") %>' Width="50px" />
+                                    <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" 
+                                        CommandArgument='<%# Eval("group_id")+"-"+Eval("sub_group_id") %>' CommandName="group" 
+                                        Text='<%# Eval("group_name") %>'></asp:LinkButton>&nbsp;
+                                        (<asp:Label ID="Label1" Runat="server" Text='<%# Eval("GrpCnt") %>'></asp:Label>)
+                                </ItemTemplate>
+                            </asp:DataList>
+                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+                                ConnectionString="<%$ ConnectionStrings:TechnetiumConnectionString1 %>" 
+                                SelectCommand="SELECT        group_name, group_id, 0 AS sub_group_id, group_image,
+                             (SELECT        COUNT(*) AS xcnt
+                               FROM            Post_Master
+                               WHERE        (Post_Status = 'Y') AND (Group_Id = g.group_id) AND (Sub_Group_Id = 0)) AS GrpCnt
+FROM            Group_Master AS g
+WHERE        (group_status = @group_status) AND (group_id = @gid)
+UNION
+SELECT        Sub_Group_Name AS group_name, Group_Id, Sub_Group_Id, Sub_Group_Image AS group_image,
+                             (SELECT        COUNT(*) AS xcnt
+                               FROM            Post_Master AS Post_Master_1
+                               WHERE        (Post_Status = 'Y') AND (Sub_Group_Id = S.Sub_Group_Id)) AS GrpCnt
+FROM            Sub_Group_Master AS S
+WHERE        (User_Id = @uid) AND (Sub_Group_Status = @group_status) AND (Group_Id = @gid)
+UNION
+SELECT        S.Sub_Group_Name AS group_name, S.Group_Id, S.Sub_Group_Id, S.Sub_Group_Image AS group_image,
+                             (SELECT        COUNT(*) AS xcnt
+                               FROM            Post_Master AS Post_Master_1
+                               WHERE        (Post_Status = 'Y') AND (Sub_Group_Id = S.Sub_Group_Id)) AS GrpCnt
+FROM            Sub_Group_Master AS S INNER JOIN
+                         Join_Sub_Group AS J ON S.Sub_Group_Id = J.Sub_Group_ID And J.Status='Y' AND J.Invite_User_Id = @uid AND S.Sub_Group_Status = @group_status AND 
+                         S.Group_Id = @gid
+ORDER BY group_id, sub_group_id, group_name">
+                                <SelectParameters>
+                                    <asp:Parameter DefaultValue="Y" Name="group_status" Type="String" />
+                                    <asp:SessionParameter DefaultValue="" Name="gid" SessionField="gid" />
+                                    <asp:SessionParameter DefaultValue="" Name="uid" SessionField="uid" />
+                                </SelectParameters>
+                            </asp:SqlDataSource>
+                            
+                        </div>
+						<!--[if !IE]>start section content footer<![endif]-->
+						<div class="section_content_footer">
+							<ul>
+								<li>
+                                <table>
+                                <tr>
+                                <td>
+                                <asp:Image ID="Image3" runat="server" Height="30px" 
+                                        ImageUrl="~/Images/Group/add-group.png" Width="30px" 
+                                        ToolTip="Click Add Group To Add new Group" /></td><td><asp:HyperLink ID="lnkSubGroup" CssClass="thickbox" runat="server" NavigateUrl="AddGroup.aspx?height=350&amp;width=500">Add Group</asp:HyperLink></td>
+                                    </tr>
+                                    </table>
+                                </li>
+								<li></li>
+							</ul>
+							<span class="scf"></span>
+						</div>
+						<!--[if !IE]>end section content footer<![endif]-->
+					</div>
+					<!--[if !IE]>end calendar<![endif]-->
+					
+					
+					
+					
+					
+					
+					
+					<!--[if !IE]>start section<![endif]-->	
+					<div class="section">
+						<!--[if !IE]>start title wrapper<![endif]-->
+						<div class="title_wrapper">
+							<h2>Notifications</h2>
+                            <span class="title_wrapper_left"></span>
+							<span class="title_wrapper_right"></span>
+						</div>
+						<!--[if !IE]>end title wrapper<![endif]-->
+						<!--[if !IE]>start section content<![endif]-->
+						<div class="section_content">
+							<!--[if !IE]>start section content top<![endif]-->
+							<div class="sct">
+                            <asp:DataList ID="DataList2" runat="server" DataKeyField="Join_Id" 
+                                DataSourceID="SqlDataSource2" onitemcommand="DataList2_ItemCommand" 
+                                Width="100%">
+                                <ItemTemplate>
+                                    <table class="style1">
+                                        <tr>
+                                            <td rowspan="2" width="50">
+                                                <asp:Image ID="Image2" runat="server" Height="50px" 
+                                                    ImageUrl='<%# Eval("Sub_Group_Image") %>' Width="50px" />
+                                            </td>
+                                            <td>
+                                                <asp:Label ID="Label2" runat="server" Text='<%# Eval("Sub_Group_Name") %>' 
+                                                    ToolTip='<%# Eval("FullName") %>'></asp:Label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right">
+                                                <asp:LinkButton ID="LinkButton2" runat="server" 
+                                                    CommandArgument='<%# Eval("Join_Id") %>' CommandName="Accept">Accept</asp:LinkButton>
+                                                |
+                                                <asp:LinkButton ID="LinkButton3" runat="server" 
+                                                    CommandArgument='<%# Eval("Join_Id") %>' CommandName="Reject">Reject</asp:LinkButton>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <br />
+                                </ItemTemplate>
+                            </asp:DataList>
+						    <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
+                                ConnectionString="<%$ ConnectionStrings:TechnetiumConnectionString1 %>" 
+                                
+                                    SelectCommand="SELECT Sub_Group_Master.Sub_Group_Name, Sub_Group_Master.Sub_Group_Image, Join_Sub_Group.Join_Id, Join_Sub_Group.Status, Registration_Master.First_Name + ' ' + Registration_Master.Last_Name AS FullName FROM Join_Sub_Group INNER JOIN Sub_Group_Master ON Join_Sub_Group.Sub_Group_ID = Sub_Group_Master.Sub_Group_Id INNER JOIN Registration_Master ON Join_Sub_Group.Sender_User_Id = Registration_Master.User_Id And Join_Sub_Group.Invite_User_Id=@uid  WHERE (Join_Sub_Group.Status = 'N') ORDER BY Join_Sub_Group.Join_Id DESC">
+                                <SelectParameters>
+                                    <asp:SessionParameter Name="uid" SessionField="uid" />
+                                </SelectParameters>
+                            </asp:SqlDataSource>
+								
+							</div>
+							<!--[if !IE]>end section content top<![endif]-->
+							<!--[if !IE]>start section content bottom<![endif]-->
+							<span class="scb"><span class="scb_left"></span><span class="scb_right"></span></span>
+							<!--[if !IE]>end section content bottom<![endif]-->
+							
+						</div>
+						<!--[if !IE]>end section content<![endif]-->
+					</div>
+					<!--[if !IE]>end section<![endif]-->
+					
+					
+					<!--[if !IE]>start section<![endif]-->	
+					<div class="section">
+						<!--[if !IE]>start title wrapper<![endif]-->
+						<div class="title_wrapper">
+							<h2>Photo Gallery</h2>
+							<span class="title_wrapper_left"></span>
+							<span class="title_wrapper_right"></span>
+						</div>
+						<!--[if !IE]>end title wrapper<![endif]-->
+						<!--[if !IE]>start section content<![endif]-->
+						<div class="section_content">
+							<!--[if !IE]>start section content top<![endif]-->
+							<div class="sct">
+								<div class="sct_left">
+									<div class="sct_right">
+										<div class="sct_left">
+											<div class="sct_right">
+												<div class="photo_gallery">
+													
+													
+														<div class="gal_top">
+															<div class="gal_bottom">
+																<div class="gal_left">
+																	<div class="gal_right">
+																		<ul>
+																			<li><a href="#"><img width="96" height="71" src="images/gallery_thumb.jpg" alt="" /></a></li>
+																			<li><a href="#"><img width="96" height="71" src="images/gallery_thumb1.jpg" alt="" /></a></li>
+																			<li><a href="#"><img width="96" height="71" src="images/gallery_thumb2.jpg" alt="" /></a></li>
+																			<li><a href="#"><img width="96" height="71" src="images/gallery_thumb3.jpg" alt="" /></a></li>
+																			<li><a href="#"><img width="96" height="71" src="images/gallery_thumb4.jpg" alt="" /></a></li>
+																			<li><a href="#"><img width="96" height="71" src="images/gallery_thumb5.jpg" alt="" /></a></li>
+																		</ul>
+																	</div>
+																</div>
+															</div>
+														</div>
+													
+													
+													
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--[if !IE]>end section content top<![endif]-->
+							
+							<!--[if !IE]>start section content bottom<![endif]-->
+							<span class="scb"><span class="scb_left"></span><span class="scb_right"></span></span>
+							<!--[if !IE]>end section content bottom<![endif]-->
+							
+							<!--[if !IE]>start section content footer<![endif]-->
+							<div class="section_content_footer">
+								<ul>
+									<li><a href="#" class="plus">Add new photo</a></li>
+									<li><a href="#" class="list">View all photos</a></li>
+								</ul>
+								<span class="scf"></span>
+							</div>
+							<!--[if !IE]>end section content footer<![endif]-->
+							
+							
+						</div>
+						<!--[if !IE]>end section content<![endif]-->
+					</div>
+					<!--[if !IE]>end section<![endif]-->
+					
+					
+					<!--[if !IE]>start quick info<![endif]-->
+					<div class="quick_info">
+						<div class="quick_info_top">
+							<h2>Quick info</h2>
+						</div>
+						<div class="quick_info_content">
+							<dl>
+								<dt>Technetium</dt>
+								<dd>Developed in 2012</dd>
+							</dl>
+							<dl>
+								<dt>Created</dt>
+								<dd>by Saurabh,Param,Punit</dd>
+							</dl>
+							<dl>
+								<dt>
+                                    <asp:Label ID="lblonline" runat="server" Text=""></asp:Label></dt>
+								<dd>currently online</dd>
+							</dl>
+							
+						</div>
+						<span class="quick_info_bottom"></span>
+					</div>
+					<!--[if !IE]>end quick info<![endif]-->
+					
+					
+				
+				
+				</div>
+			</div>
+			<!--[if !IE]>end sidebar<![endif]-->
+			
+		</div>        
+    </div>
+    	
+	<!--[if !IE]>start footer<![endif]-->
+	<div id="footer">
+		<div id="footer_inner">
+		
+		<dl class="copy">
+			<dt><strong>PSP</strong> <em>build 26122008</em></dt>
+			<dd>&copy; 2012-13 Technetium.com  All rights reserved.</dd>
+		</dl>
+		
+<%--		<dl class="quick_links">
+			<dt><strong>Quick Links :</strong></dt>
+			<dd>
+				<ul>
+					<li><a href="#">Tech Hub </a></li>
+					<li><a href="#">Profile</a></li>
+					<li><a href="#">View Group</a></li>
+					<li><a href="#">New Group</a></li>
+					<li><a href="#">Users</a></li>
+					<li class="last"><a href="#">Log out</a></li>
+				</ul>
+			</dd>
+		</dl>
+--%>		
+		</div>
+	</div>
+	<!--[if !IE]>end footer<![endif]-->
+    <script language=javascript>
+        updateTime();
+    </script>
+    </form>
+</body>
+</html>
